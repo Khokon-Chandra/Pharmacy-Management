@@ -9,6 +9,6 @@ class RoleUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles_user';
+    protected $table = 'role_user';
     protected $primaryKey = 'user_id';
 }

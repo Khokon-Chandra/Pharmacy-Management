@@ -114,7 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Users
 
-    Route::resource('users', 'UsersController');
+    Route::resource('users', \App\Http\Controllers\UsersController::class);
 
     // Analysis
 
