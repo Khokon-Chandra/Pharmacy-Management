@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\HomeController;
@@ -9,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\ToolsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,26 +94,27 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Tools
 
-    Route::get('tools/discount', 'ToolsController@discount')->name('tools.discount');
-    Route::get('tools/dsearch', 'ToolsController@dsearch')->name('tools.dsearch');
-    Route::get('tools/note', 'ToolsController@note')->name('tools.note');
+    Route::get('tools/discount', [ToolsController::class,'discount'])->name('tools.discount');
+    Route::get('tools/dsearch', [ToolsController::class,'dsearch'])->name('tools.dsearch');
+    Route::get('tools/note', [ToolsController::class,'note'])->name('tools.note');
     Route::post('tools', [
-        'uses'  => 'ToolsController@noteStore',
+        'uses'  => [ToolsController::class,'noteStore'],
         'as'    => 'tools.noteStore'
     ]);
     Route::match(['PUT','PATCH'], 'tools/note/{note}', [
-        'uses'  => 'ToolsController@noteUpdate',
+        'uses'  => [ToolsController::class,'noteUpdate'],
         'as'    => 'tools.noteUpdate'
     ]);
-    Route::delete('tools/note/{note}', 'ToolsController@noteDestroy')->name('tools.noteDestroy');
+    Route::delete('tools/note/{note}', [ToolsController::class,'noteDestroy'])->name('tools.noteDestroy');
 
     //Backups
     Route::get('setting/backup/get/{filename}', [
         'as' => 'backup.download',
-        'uses' => 'BackupController@backupDownload']);
-    Route::get('setting/backup', 'BackupController@backup')->name('setting.backup');
-    Route::post('setting', 'BackupController@backupStore')->name('setting.backupStore');
-    Route::delete('setting/backups/{setting}', 'BackupController@backupDestroy')->name('setting.backupDestroy');
+        'uses' => [BackupController::class,'backupDownload']
+    ]);
+    Route::get('setting/backup', [BackupController::class,'backup'])->name('setting.backup');
+    Route::post('setting', [BackupController::class,'backupStore'])->name('setting.backupStore');
+    Route::delete('setting/backups/{setting}', [BackupController::class,'backupDestroy'])->name('setting.backupDestroy');
 
     // Users
 
@@ -118,12 +122,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Analysis
 
-    Route::get('analysis', 'AnalysisController@index');
-    Route::get('analysis/sales', 'AnalysisController@sales');
-    Route::get('analysis/purchases', 'AnalysisController@purchases');
-    Route::get('analysis/customers', 'AnalysisController@customers');
+    Route::get('analysis', [AnalysisController::class,'index']);
+    Route::get('analysis/sales', [AnalysisController::class,'sales']);
+    Route::get('analysis/purchases', [AnalysisController::class,'purchases']);
+    Route::get('analysis/customers', [AnalysisController::class,'customers']);
 });
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

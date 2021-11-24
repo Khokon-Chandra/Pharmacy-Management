@@ -27,8 +27,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = DB::table('users')
-            ->select('users.id', 'users.name', 'users.email', 'users.created_at', 'users.updated_at', 'roles_user.roles_id', 'roles_user.user_id')
-            ->join('roles_user', 'users.id', '=', 'roles_user.user_id')
+            ->select('users.id', 'users.name', 'users.email', 'users.created_at', 'users.updated_at', 'role_user.role_id', 'role_user.user_id')
+            ->join('role_user', 'users.id', '=', 'role_user.user_id')
             ->get();
         return view('users.index', ['users' => $users]);
     }
