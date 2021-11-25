@@ -13,9 +13,10 @@ function set_active($path, $active = 'active')
  *  get setting from datab
  */
 
+
 function get_setting()
 {
-    $setting = \App\Settings::all()->first();
+    $setting = \App\Models\Setting::all()->first();
 
     if ($setting !== null) {
         return $setting;
@@ -154,13 +155,13 @@ function check($yasterday,$today)
        echo '0'.get_currencySymbols().' |';
        }
        if($yasterday_result > $today_result){
-       echo '<small style="color:#2ecc71;"> '.$yasterday_result.' <i class="fa fa-caret-up" aria-hidden="true"></i> 
+       echo '<small style="color:#2ecc71;"> '.$yasterday_result.' <i class="fa fa-caret-up" aria-hidden="true"></i>
        '. trans("analysis.now").'</small><br>';
        }else{
-       echo '<small style="color:#e74c3c;"> '.$yasterday_result.' <i class="fa fa-caret-down" aria-hidden="true"></i> 
+       echo '<small style="color:#e74c3c;"> '.$yasterday_result.' <i class="fa fa-caret-down" aria-hidden="true"></i>
        '.trans("analysis.now").'</small><br>';
        }
-    
+
 }
 
 // Product and customer
@@ -196,10 +197,10 @@ function product($yasterday,$today)
         echo '0'. '|';
     }
     if($yasterday_result > $today_result){
-        echo '<small style="color:#2ecc71;"> '.$yasterday_result.' <i class="fa fa-caret-up" aria-hidden="true"></i> 
+        echo '<small style="color:#2ecc71;"> '.$yasterday_result.' <i class="fa fa-caret-up" aria-hidden="true"></i>
        '. trans("analysis.now").'</small><br>';
     }else{
-        echo '<small style="color:#e74c3c;"> '.$yasterday_result.' <i class="fa fa-caret-down" aria-hidden="true"></i> 
+        echo '<small style="color:#e74c3c;"> '.$yasterday_result.' <i class="fa fa-caret-down" aria-hidden="true"></i>
        '.trans("analysis.now").'</small><br>';
     }
 
